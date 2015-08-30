@@ -32,7 +32,7 @@ TODO
 
 ### Translation of existing numeric commands
 
-#### RFC 2812
+#### RFC 2812 and IRCv3
 
 Numerics defined in [section 5 of RFC 2812][rfc2812-sec5]
 or in other parts of the IRCv3 specification are translated to their
