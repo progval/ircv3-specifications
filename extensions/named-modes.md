@@ -16,9 +16,7 @@ copyrights:
 
 The name of this client capability MUST be named `named-modes`.
 
-.......
-.......
-.......
+This capability enables receiving PROP messages instead of MODE messages as well as introducing the `RPL_CHMODELIST` and `RPL_UMODELIST` numerics to replace the user and channel mode parameters of the `RPL_MYINFO` numeric.
 
 ## New numerics on connection
 
