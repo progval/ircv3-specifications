@@ -1,11 +1,16 @@
-named modes client capability specification
-=============================================
-
-Copyright 2014 Attila Molnar <attilamolnar@hush.com>.
-
-Unlimited redistribution and modification of this document is allowed
-provided that the above copyright notice and this permission notice
-remains in tact.
+---
+title: IRCv3 Named Modes Extension
+layout: spec
+copyrights:
+  -
+    name: "Attila Molnar"
+    period: "2014"
+    email: "attilamolnar@hush.com"
+  -
+    name: "Peter Powell"
+    period: "2017"
+    email: "petpow@saberuk.com"
+---
 
 ## Intro
 
