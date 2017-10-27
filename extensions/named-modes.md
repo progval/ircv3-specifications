@@ -49,11 +49,11 @@ The list given by these two numerics are in two separate namespaces; it is
 possible to have the same mode name for a user mode and a channel mode,
 because the target of a mode change is always unambiguous.
 
-When this capability is negotiated, the mode lists in RPL_SERVERVERSION
+When this capability is negotiated, the mode lists in RPL_MYINFO
 (004) MUST be considered undefined, server implementations MAY
 omit the last 3 parameters for that numeric entirely and clients MUST
 handle this.
-Servers MAY not send the RPL_SERVERVERSION numeric at all, clients
+Servers MAY not send the RPL_MYINFO numeric at all, clients
 MUST handle this case as well.
 
 Example 1: client connects and requests the named-modes capability
@@ -233,3 +233,4 @@ Letter | Name
  `w`   | `wallops`
  `s`   | `snomask`
 ---------------------
+RPL_MYINFO
