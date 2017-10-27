@@ -22,11 +22,11 @@ The name of this client capability MUST be named `named-modes`.
 
 ## New numerics on connection
 
-These numerics MAY occur more than once ...
+These numerics MAY occur more than once. If the reply consists of multiple lines (due to IRC length limitations) all but the last numeric MUST have a parameter containing only an asterisk (*) preceding the mode list.
 
 ### RPL_CHMODELIST
 
-    :<server name> XXX <nick> {[<type>:]<modename>=<letter>}+
+    :<server name> XXX <nick> [*] {[<type>:]<modename>=<letter>}+
 
 where `<type>` is one of the following that tells the client about the nature
 of the mode:
@@ -39,7 +39,7 @@ of the mode:
 
 ### RPL_UMODELIST
 
-    :<server name> YYY <nick> {[<type:>]<modename>=<letter>}+
+    :<server name> YYY <nick> [*] {[<type:>]<modename>=<letter>}+
 
 where type is
 * nothing - mode is a flag, it never has a parameter.
