@@ -10,6 +10,11 @@ copyrights:
     name: "Peter Powell"
     period: "2017"
     email: "petpow@saberuk.com"
+  -
+    name: "Val Lorentz"
+    period: "2021"
+    email: "progval+ircv3@progval.net"
+
 ---
 
 ## Intro
@@ -24,7 +29,7 @@ These numerics MAY occur more than once. If the reply consists of multiple lines
 
 ### RPL_CHMODELIST
 
-    :<server name> XXX <nick> [*] {[<type>:]<modename>=<letter>}+
+    :<server name> XXX <nick> [*] {[<type>:]<modename>[=<letter>]}+
 
 where `<type>` is one of the following that tells the client about the nature
 of the mode:
@@ -35,13 +40,17 @@ of the mode:
 * 3 - mode is a parameter mode, requires a parameter when setting, requires no parameter when unsetting (group 3 in 005 CHANMODES).
 * 4 - mode is a prefix mode, requires a parameter when setting and unsetting, target is always a user on the channel.
 
+and `<letter>` is an equivalent mode name for the `MODE` command.
+
 ### RPL_UMODELIST
 
-    :<server name> YYY <nick> [*] {[<type:>]<modename>=<letter>}+
+    :<server name> YYY <nick> [*] {[<type:>]<modename>[=<letter>]}+
 
 where type is
 * nothing - mode is a flag, it never has a parameter.
 * 1 - mode requires a parameter when setting, requires no parameter when unsetting.
+
+and `<letter>` is an equivalent mode name for the `MODE` command.
 
 The list given by these two numerics are in two separate namespaces; it is
 possible to have the same mode name for a user mode and a channel mode,
@@ -187,7 +196,20 @@ by MAXMODES.
 Note that the `+` or `-` sign in this case is OPTIONAL. Omitting the sign is
 equivalent to a `+` for that single item.
 
-Example:
+## Translation between `PROP` and `MODE`
+
+When a client send a `PROP` message that should be relayed to other clients,
+servers MAY translate it to a `MODE` command using an equivalent
+mode letter (as defined in `RPL_CHMODELIST`) to clients that did not
+negotiate this capability, but MUST NOT send them a `PROP`.
+
+When a client sends either `PROP` or `MODE`, servers SHOULD send them as
+a `PROP` to clients who negotiated this capability.
+Clients MUST accept `MODE` messages.
+
+## Examples
+
+*This section is not normative*
 
 Changing channel modes
 
