@@ -51,7 +51,7 @@ When this capability is negotiated, the mode lists in RPL_MYINFO
 (004) MUST be considered undefined, server implementations MAY
 omit the last 3 parameters for that numeric entirely and clients MUST
 handle this.
-Servers MAY not send the RPL_MYINFO numeric at all, clients
+Servers MAY send no RPL_MYINFO numeric at all, clients
 MUST handle this case as well.
 
 Example 1: client connects and requests the named-modes capability
