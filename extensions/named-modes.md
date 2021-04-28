@@ -29,26 +29,26 @@ These numerics MAY occur more than once. If the reply consists of multiple lines
 
 ### RPL_CHMODELIST
 
-    :<server name> XXX <nick> [*] {[<type>:]<modename>[=<letter>]}+
+    :<server name> XXX <nick> [*] {<type>:<modename>[=<letter>]}+
 
 where `<type>` is one of the following that tells the client about the nature
 of the mode:
 
-* nothing - mode is a flag, i.e. no parameter (group 4 in 005 CHANMODES).
 * 1 - mode is a list mode, requires a parameter when setting and unsetting (group 1 in 005 CHANMODES).
 * 2 - mode is a parameter mode, requires a parameter when setting and unsetting (group 2 in 005 CHANMODES).
 * 3 - mode is a parameter mode, requires a parameter when setting, requires no parameter when unsetting (group 3 in 005 CHANMODES).
-* 4 - mode is a prefix mode, requires a parameter when setting and unsetting, target is always a user on the channel.
+* 4 - mode is a flag, i.e. no parameter (group 4 in 005 CHANMODES).
+* 5 - mode is a prefix mode, requires a parameter when setting and unsetting, target is always a user on the channel.
 
 and `<letter>` is an equivalent mode name for the `MODE` command.
 
 ### RPL_UMODELIST
 
-    :<server name> YYY <nick> [*] {[<type:>]<modename>[=<letter>]}+
+    :<server name> YYY <nick> [*] {<type>:<modename>[=<letter>]}+
 
 where type is
-* nothing - mode is a flag, it never has a parameter.
-* 1 - mode requires a parameter when setting, requires no parameter when unsetting.
+* 3 - mode requires a parameter when setting, requires no parameter when unsetting.
+* 4 - mode is a flag, it never has a parameter.
 
 and `<letter>` is an equivalent mode name for the `MODE` command.
 
@@ -77,8 +77,8 @@ Example 1: client connects and requests the named-modes capability
     Server: :example.server 003 tester :This server was created ...
     Server: :example.server 004 tester :example.server
     Server: :example.server 005 tester :EXCEPTS=e NICKLEN=30 INVEX=I MAP MODES=4 NETWORK=Example
-    Server: :example.server XXX tester :4:op=o 4:voice=v private=p secret=s inviteonly=i topiclock=t noextmsg=n moderated=m 3:limit=l 1:ban=b 2:key=k
-    Server: :example.server YYY tester :oper=o invisible=i 1:snomask=s wallops=w
+    Server: :example.server XXX tester :5:op=o 5:voice=v 4:private=p 4:secret=s 4:inviteonly=i 4:topiclock=t 4:noextmsg=n 4:moderated=m 3:limit=l 1:ban=b 2:key=k
+    Server: :example.server YYY tester :4:oper=o 4:invisible=i 1:snomask=s 4:wallops=w
 
 ## Listing modes on a channel
 
