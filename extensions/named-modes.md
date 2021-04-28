@@ -29,7 +29,7 @@ These numerics MAY occur more than once. If the reply consists of multiple lines
 
 ### RPL_CHMODELIST
 
-    :<server name> XXX <nick> [*] {[<type>:]<modename>=[<letter>]}+
+    :<server name> XXX <nick> [*] {[<type>:]<modename>[=<letter>]}+
 
 where `<type>` is one of the following that tells the client about the nature
 of the mode:
@@ -44,7 +44,7 @@ and `<letter>` is an equivalent mode name for the `MODE` command.
 
 ### RPL_UMODELIST
 
-    :<server name> YYY <nick> [*] {[<type:>]<modename>=[<letter>]}+
+    :<server name> YYY <nick> [*] {[<type:>]<modename>[=<letter>]}+
 
 where type is
 * nothing - mode is a flag, it never has a parameter.
