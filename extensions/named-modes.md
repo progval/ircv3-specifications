@@ -10,6 +10,11 @@ copyrights:
     name: "Peter Powell"
     period: "2017"
     email: "petpow@saberuk.com"
+  -
+    name: "Val Lorentz"
+    period: "2021"
+    email: "progval+ircv3@progval.net"
+
 ---
 
 ## Intro
