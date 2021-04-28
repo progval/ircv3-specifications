@@ -97,7 +97,7 @@ Query syntax:
 
 Reply syntax:
 
-    RPL_MODELIST <nick> <channel> <modename> :<mask> [<setter> <settime>]
+    RPL_MODELIST <nick> <channel> <modename> <mask> [<setter> <settime>]
     RPL_MODELISTEND <nick> <channel> <modename> :End of list
 
 The `settime` argument, if present, MUST be a UNIX timestamp of the time this mode
@@ -115,9 +115,9 @@ Example without the optional arguments:
 Example with the optional arguments:
 
     Client: PROP #opers ban
-    Server: :example.server 701 tester #chat ban :*!*example.org mike!mike@localhost 567890123
-    Server: :example.server 701 tester #chat ban :*!*@192.0.2.69 ChanServ!ChanServ@services.example.com 123123123
-    Server: :example.server 701 tester #chat ban :*!*@192.0.2.70 ChanServ!ChanServ@services.example.com 123123123
+    Server: :example.server 701 tester #chat ban *!*example.org mike!mike@localhost :567890123
+    Server: :example.server 701 tester #chat ban *!*@192.0.2.69 ChanServ!ChanServ@services.example.com :123123123
+    Server: :example.server 701 tester #chat ban *!*@192.0.2.70 ChanServ!ChanServ@services.example.com :123123123
     Server: :example.server 702 tester #chat ban :End of list
 
 
