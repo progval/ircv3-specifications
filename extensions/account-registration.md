@@ -107,7 +107,8 @@ their nickname or waiting.
     FAIL REGISTER BAD_ACCOUNTNAME <account> <message>
 
 Sent by the server to indicate that the desired accountname is invalid or
-otherwise restricted
+otherwise restricted/disallowed. The message should tell the user how or why
+the desired name has been rejected.
 
     FAIL REGISTER ACCOUNTNAME_MUST_BE_NICK <account> <message>
 
