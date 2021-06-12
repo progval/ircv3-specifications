@@ -96,13 +96,23 @@ to complete registration of the `<account>`, as explain in the human-readable
 
 Sent by the server as a response to `REGISTER` when the client tried to register
 while using a nick that is not available as a new account's name
-(for example, because someone already registered it).
+because someone already registered it.
 
 The server MUST NOT send this response before the client sent a `NICK` command.
 
 The client MAY try registering again later.
 Clients should not automatically retry immediately without changing
 their nickname or waiting.
+
+    FAIL REGISTER BAD_ACCOUNTNAME <account> <message>
+
+Sent by the server to indicate that the desired accountname is invalid or
+otherwise restricted
+
+    FAIL REGISTER ACCOUNTNAME_MUST_BE_NICK <account> <message>
+
+Sent by the server to indicate that the desired accountname does not match
+the user's current nick, when it must match.
 
     FAIL REGISTER NEED_NICK * <message>
 
