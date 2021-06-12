@@ -42,8 +42,8 @@ The defined keys are:
    `FAIL REGISTER COMPLETE_CONNECTION_REQUIRED`
  * `email-required` - if present, registrations require a valid email address
    to process
- * `notnick` - if present, the account name can be different from the
-   user's current nickname
+ * `custom-accountname` - if present, the account name can be different
+   from the user's current nickname
 
 Clients MUST ignore any value assigned to these keys, and MUST ignore
 any unknown key.
@@ -62,8 +62,8 @@ The `REGISTER` command informs the server of a request to register
 an account named for the current nick of the requestor.
 
 If `<accountname>` is `*`, then this value is the user's current nickname.
-If the server advertises the `notnick` key, then this desired account
-name can be different from the user's current nickname.
+If the server advertises the `custom-accountname` key, then this desired
+account name can be different from the user's current nickname.
 
 The `REGISTER` command MAY be sent at any point during the connection
 that the client has a valid nickname.
