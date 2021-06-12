@@ -28,8 +28,8 @@ for future organic expansion.
 
 ### Capability
 
-This specification adds the `draft/register` capability, whose presence
-signifies that the server accepts the `REGISTER` command.
+This specification adds the `draft/account-registration` capability, whose
+presence signifies that the server accepts the `REGISTER` command.
 
 The capability has an optional value, a comma-separated list of key-value
 pairs; the format is intended to follow the precedent set by
@@ -42,22 +42,28 @@ The defined keys are:
    `FAIL REGISTER COMPLETE_CONNECTION_REQUIRED`
  * `email-required` - if present, registrations require a valid email address
    to process
+ * `notnick` - if present, the account name can be different from the
+   user's current nickname
 
 Clients MUST ignore any value assigned to these keys, and MUST ignore
 any unknown key.
 
 Software implementing this work-in-progress specification MUST NOT use
 the unprefixed `register` or `account-registration` capability names.
-Instead, implementations SHOULD use the `draft/register`
+Instead, implementations SHOULD use the `draft/account-registration`
 capability name to be interoperable with other software implementing
 a compatible work-in-progress version.
 
 ### Commands
 
-    REGISTER {<email> | "*"} <password>
+    REGISTER <accountname> {<email> | "*"} <password>
     
 The `REGISTER` command informs the server of a request to register
 an account named for the current nick of the requestor.
+
+If `<accountname>` is `*`, then this value is the user's current nickname.
+If the server advertises the `notnick` key, then this desired account
+name can be different from the user's current nickname.
 
 The `REGISTER` command MAY be sent at any point during the connection
 that the client has a valid nickname.
