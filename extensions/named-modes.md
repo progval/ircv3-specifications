@@ -183,19 +183,6 @@ by the protocol such as the line length limit.
 Note that this is different than how the traditional `MODE` command behaves,
 which usually only contains up to MAXMODES changed modes.
 
-Mode changes from the server to the client MUST have the following syntax:
-
-    :<source> PROP <target> [+|-]<modename>[=<param>]} [[+|-]<modename 2>[=<param 2> ... [[+|-]<modename n>[=<param n>]]
-
-Mode change requests - that is, a `PROP` from the client to the server -
-MUST have the same syntax as above, except that the command source is optional
-(as usual for IRC messages) and it SHOULD not contain more items than allowed
-by MAXMODES.
-
-
-Note that the `+` or `-` sign in this case is OPTIONAL. Omitting the sign is
-equivalent to a `+` for that single item.
-
 ## Translation between `PROP` and `MODE`
 
 When a client send a `PROP` message that should be relayed to other clients,
