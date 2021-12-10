@@ -267,14 +267,14 @@ The following sections define names for existing standard modes.
 
 This spec defines the following new numerics:
 
-| No. | Label                   |
-| --- | ----------------------- |
-| 960 | `RPL_ENDOFPROPLIST`     |
-| 961 | `RPL_PROPLIST`          |
-| AAA | `RPL_ENDOFLISTPROPLIST` |
-| BBB | `RPL_LISTPROPLIST`      |
-| XXX | `RPL_CHMODELIST`        |
-| YYY | `RPL_UMODELIST`         |
+| No. | Label                   | Notes (will be removed before merging) |
+| --- | ----------------------- | ------------ |
+| 960 | `RPL_ENDOFPROPLIST`     | Used by Insp |
+| 961 | `RPL_PROPLIST`          | Used by Insp |
+| AAA | `RPL_ENDOFLISTPROPLIST` | Temporarily set to 962 |
+| BBB | `RPL_LISTPROPLIST`      | Temporarily set to 963 |
+| XXX | `RPL_CHMODELIST`        | Temporarily set to 964 |
+| YYY | `RPL_UMODELIST`         | Temporarily set to 965 |
 
 ### RPL_ISUPPORT Token
 
