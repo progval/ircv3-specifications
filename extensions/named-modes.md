@@ -19,13 +19,13 @@ copyrights:
 
 ## Intro
 
-The name of this client capability MUST be named `named-modes`.
+The name of this client capability MUST be named `draft/named-modes`.
 
 This capability enables receiving PROP messages instead of MODE messages as well as introducing the `RPL_CHMODELIST` and `RPL_UMODELIST` numerics to replace the user and channel mode parameters of the `RPL_MYINFO` numeric.
 
 ## New numerics on connection
 
-These numerics MAY occur more than once. If the reply consists of multiple lines (due to IRC length limitations) all but the last numeric MUST have a parameter containing only an asterisk (*) preceding the mode list.
+These numerics MAY occur more than once. If the reply consists of multiple lines (due to IRC length limitations) all but the last numeric MUST have a parameter containing only an asterisk (`*`) preceding the mode list.
 
 ### RPL_CHMODELIST
 
@@ -42,6 +42,8 @@ of the mode:
 
 and `<letter>` is an equivalent mode name for the `MODE` command.
 
+Clients MUST ignore unknown types, even with multiple digits.
+
 ### RPL_UMODELIST
 
     :<server name> YYY <nick> [*] {<type>:<modename>[=<letter>]}+
@@ -51,6 +53,7 @@ where type is
 * 4 - mode is a flag, it never has a parameter.
 
 and `<letter>` is an equivalent mode name for the `MODE` command.
+Clients MUST ignore unknown types, even with multiple digits.
 
 The list given by these two numerics are in two separate namespaces; it is
 possible to have the same mode name for a user mode and a channel mode,
@@ -82,7 +85,9 @@ Example 1: client connects and requests the named-modes capability
 
 ## Listing modes on a channel
 
-PROP <channel>
+Query syntax:
+
+    PROP <channel>
 
 Reply syntax:
 
@@ -91,6 +96,7 @@ Reply syntax:
 
 Servers MAY send multiple `RPL_PROPLIST` replies before `RPL_ENDOFPROPLIST`.
 
+Example:
 
     PROP #example
     :test.server 961 modernclient #example :topiclock noextmsg limit=5
@@ -140,15 +146,13 @@ in a mode change. A mode change MUST have at least one item in it.
 
 A mode change from the client to the server is always a request; it being sent
 does not guarantee the server will honor it, even if the client (thinks) it has
-all the necessary priviliges, etc.
+all the necessary privileges, etc.
 
 A mode change from the server to the client is a notification about a change
 which had already happened on the server by the time the client receives the
 command.
 
-`PROP` command
-
-Syntax:
+Query syntax:
 
     PROP <target> {<+|-><modename>[=<parameter>]}+
 
@@ -203,7 +207,7 @@ When a client sends either `PROP` or `MODE`, servers SHOULD send them as
 a `PROP` to clients who negotiated this capability.
 Clients MUST accept `MODE` messages.
 
-## Examples
+### Examples
 
 *This section is not normative*
 
@@ -272,4 +276,4 @@ New numerics that this spec defines are:
 | AAA | `RPL_ENDOFLISTPROPLIST` |
 | BBB | `RPL_LISTPROPLIST`      |
 | XXX | `RPL_CHMODELIST`        |
-| XXX | `RPL_UMODELIST`         |
+| YYY | `RPL_UMODELIST`         |
