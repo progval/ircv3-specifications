@@ -103,6 +103,11 @@ Reply syntax:
 
 Servers MAY send multiple `RPL_PROPLIST` replies before `RPL_ENDOFPROPLIST`.
 
+Servers SHOULD not include modes of type 1 (list) or 5 (prefix) in this list as there may be too many; just like with the `MODE` command.
+
+Servers MAY omit the `<param>` for any mode, and they SHOULD NOT add one for mode of type 4 (flag).
+Clients MUST gracefully handle unexpected parameters, and SHOULD ignore them.
+
 Example:
 
     Client: PROP #example
