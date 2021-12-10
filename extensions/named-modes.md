@@ -71,17 +71,17 @@ Example 1: client connects and requests the named-modes capability
     Client: CAP LS
     Server: NICK tester
     Client: USER user 0 0 :gecos
-    Server: :example.server CAP * LS :named-modes
+    Server: :server.example CAP * LS :named-modes
     Client: CAP REQ named-modes
     Client: CAP END
-    Server: :example.server CAP tester ACK :named-modes
-    Server: :example.server 001 tester :Welcome to an IRC network, nick!user@example.com!
-    Server: :example.server 002 tester :Your host is example.server, running version 0.0
-    Server: :example.server 003 tester :This server was created ...
-    Server: :example.server 004 tester :example.server
-    Server: :example.server 005 tester :EXCEPTS=e NICKLEN=30 INVEX=I MAP MODES=4 NETWORK=Example
-    Server: :example.server XXX tester :5:op=o 5:voice=v 4:private=p 4:secret=s 4:inviteonly=i 4:topiclock=t 4:noextmsg=n 4:moderated=m 3:limit=l 1:ban=b 2:key=k
-    Server: :example.server YYY tester :4:oper=o 4:invisible=i 1:snomask=s 4:wallops=w
+    Server: :server.example CAP tester ACK :named-modes
+    Server: :server.example 001 tester :Welcome to an IRC network, nick!user@example.com!
+    Server: :server.example 002 tester :Your host is server.example, running version 0.0
+    Server: :server.example 003 tester :This server was created ...
+    Server: :server.example 004 tester :server.example
+    Server: :server.example 005 tester :EXCEPTS=e NICKLEN=30 INVEX=I MAP MODES=4 NETWORK=Example
+    Server: :server.example XXX tester :5:op=o 5:voice=v 4:private=p 4:secret=s 4:inviteonly=i 4:topiclock=t 4:noextmsg=n 4:moderated=m 3:limit=l 1:ban=b 2:key=k
+    Server: :server.example YYY tester :4:oper=o 4:invisible=i 1:snomask=s 4:wallops=w
 
 ## Listing modes on a channel
 
@@ -98,9 +98,9 @@ Servers MAY send multiple `RPL_PROPLIST` replies before `RPL_ENDOFPROPLIST`.
 
 Example:
 
-    PROP #example
-    :test.server 961 modernclient #example :topiclock noextmsg limit=5
-    :test.server 960 modernclient #example :End of mode list
+    Client: PROP #example
+    Server: :server.example 961 modernclient #example :topiclock noextmsg limit=5
+    Server: :server.example 960 modernclient #example :End of mode list
 
 ## Getting the list of a listmode on a channel
 
@@ -123,17 +123,17 @@ or server name of the entity who placed this mode.
 Example without the optional arguments:
 
     Client: PROP #chat ban
-    Server: :example.server BBB tester #chat ban :*!*@example.org
-    Server: :example.server BBB tester #chat ban :another!banned@user.example.com
-    Server: :example.server AAA tester #chat ban :End of list
+    Server: :server.example BBB tester #chat ban :*!*@example.org
+    Server: :server.example BBB tester #chat ban :another!banned@user.example.com
+    Server: :server.example AAA tester #chat ban :End of list
 
 Example with the optional arguments:
 
     Client: PROP #opers ban
-    Server: :example.server BBB tester #chat ban :*!*example.org mike!mike@localhost 567890123
-    Server: :example.server BBB tester #chat ban :*!*@192.0.2.69 ChanServ!ChanServ@services.example.com 123123123
-    Server: :example.server BBB tester #chat ban :*!*@192.0.2.70 ChanServ!ChanServ@services.example.com 123123123
-    Server: :example.server AAA tester #chat ban :End of list
+    Server: :server.example BBB tester #chat ban :*!*example.org mike!mike@localhost 567890123
+    Server: :server.example BBB tester #chat ban :*!*@192.0.2.69 ChanServ!ChanServ@services.example.com 123123123
+    Server: :server.example BBB tester #chat ban :*!*@192.0.2.70 ChanServ!ChanServ@services.example.com 123123123
+    Server: :server.example AAA tester #chat ban :End of list
 
 
 ## Changing modes
