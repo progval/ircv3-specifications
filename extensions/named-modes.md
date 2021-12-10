@@ -23,6 +23,13 @@ The name of this client capability MUST be named `draft/named-modes`.
 
 This capability enables receiving PROP messages instead of MODE messages as well as introducing the `RPL_CHMODELIST` and `RPL_UMODELIST` numerics to replace the user and channel mode parameters of the `RPL_MYINFO` numeric.
 
+## Motivation
+
+The IRC protocol originally had a `MODE` command to configure channels, using single character as configuration keys.
+Implementation extend the base protocol with their own modes, causing some of them to exhaust the namespace available. Additionally, independent implementations can accidentally implement the same feature with different characters, or use the same characters for different features.
+
+This specification aims to resolve both these issues, by introducing a virtually infinite namespace for new configuration keys, and by offering a way for implementations to define their own sub-namespaces via vendor prefixes to avoid clashes.
+
 ## New numerics on connection
 
 These numerics MAY occur more than once. If the reply consists of multiple lines (due to IRC length limitations) all but the last numeric MUST have a parameter containing only an asterisk (`*`) preceding the mode list.
