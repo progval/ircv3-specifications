@@ -285,9 +285,9 @@ This spec defines the following new numerics:
 
 ### RPL_ISUPPORT Token
 
-This specification defines the required `MAXMODES` token for use in `RPL_ISUPPORT` (005) responses.
+This specification defines the REQUIRED `MAXMODES` token for use in `RPL_ISUPPORT` (005) responses.
 This token MUST have an integer value greater than 0.
 
-Servers SHOULD use this token to communicate to clients the maximum numbers of modes changes in a single PROP request. In the absence of this token or its value, they should assume it is 1.
+Servers should use this token to communicate to clients the maximum numbers of modes changes in a single PROP request. In the absence of this token or its value, they should assume it is 1.
 
 Clients MUST support receiving PROP updates with more changes than the value of `MAXMODES`.
