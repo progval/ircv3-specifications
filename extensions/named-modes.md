@@ -108,17 +108,17 @@ or server name of the entity who placed this mode.
 Example without the optional arguments:
 
     Client: PROP #chat ban
-    Server: :example.server 960 tester #chat ban :*!*@example.org
-    Server: :example.server 960 tester #chat ban :another!banned@user.example.com
-    Server: :example.server 961 tester #chat ban :End of list
+    Server: :example.server 701 tester #chat ban :*!*@example.org
+    Server: :example.server 701 tester #chat ban :another!banned@user.example.com
+    Server: :example.server 702 tester #chat ban :End of list
 
 Example with the optional arguments:
 
     Client: PROP #opers ban
-    Server: :example.server 960 tester #chat ban :*!*example.org mike!mike@localhost 567890123
-    Server: :example.server 960 tester #chat ban :*!*@192.0.2.69 ChanServ!ChanServ@services.example.com 123123123
-    Server: :example.server 960 tester #chat ban :*!*@192.0.2.70 ChanServ!ChanServ@services.example.com 123123123
-    Server: :example.server 961 tester #chat ban :End of list
+    Server: :example.server 701 tester #chat ban :*!*example.org mike!mike@localhost 567890123
+    Server: :example.server 701 tester #chat ban :*!*@192.0.2.69 ChanServ!ChanServ@services.example.com 123123123
+    Server: :example.server 701 tester #chat ban :*!*@192.0.2.70 ChanServ!ChanServ@services.example.com 123123123
+    Server: :example.server 702 tester #chat ban :End of list
 
 
 ## Changing modes
