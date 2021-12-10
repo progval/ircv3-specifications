@@ -84,10 +84,17 @@ Example 1: client connects and requests the named-modes capability
 
 PROP <channel>
 
-    RPL_PROPSSET <nick> :[<modename>[=<param>]] [<modename 2>[=<param 2>]] ... [<modename n>[=<param n>]]]
+Reply syntax:
+
+    RPL_PROPLIST <nick> <channel> :[<modename>[=<param>]] [<modename 2>[=<param 2>]] ... [<modename n>[=<param n>]]]
+    RPL_ENDOFPROPLIST <nick> <channel> <modename> :End of list
+
+Servers MAY send multiple `RPL_PROPLIST` replies before `RPL_ENDOFPROPLIST`.
+
 
     PROP #example
-    :test.server ZZZ modernclient #example :topiclock noextmsg limit=5
+    :test.server 961 modernclient #example :topiclock noextmsg limit=5
+    :test.server 960 modernclient #example :End of mode list
 
 ## Getting the list of a listmode on a channel
 
@@ -97,8 +104,10 @@ Query syntax:
 
 Reply syntax:
 
-    RPL_MODELIST <nick> <channel> <modename> :<mask> [<setter> <settime>]
-    RPL_MODELISTEND <nick> <channel> <modename> :End of list
+    RPL_LISTPROPLIST <nick> <channel> <modename> :<mask> [<setter> <settime>]
+    RPL_ENDOFLISTPROPLIST <nick> <channel> <modename> :End of list
+
+Servers MAY send multiple `RPL_PROPLIST` replies before `RPL_ENDOFPROPLIST`.
 
 The `settime` argument, if present, MUST be a UNIX timestamp of the time this mode
 was placed.
@@ -108,17 +117,17 @@ or server name of the entity who placed this mode.
 Example without the optional arguments:
 
     Client: PROP #chat ban
-    Server: :example.server 701 tester #chat ban :*!*@example.org
-    Server: :example.server 701 tester #chat ban :another!banned@user.example.com
-    Server: :example.server 702 tester #chat ban :End of list
+    Server: :example.server BBB tester #chat ban :*!*@example.org
+    Server: :example.server BBB tester #chat ban :another!banned@user.example.com
+    Server: :example.server AAA tester #chat ban :End of list
 
 Example with the optional arguments:
 
     Client: PROP #opers ban
-    Server: :example.server 701 tester #chat ban :*!*example.org mike!mike@localhost 567890123
-    Server: :example.server 701 tester #chat ban :*!*@192.0.2.69 ChanServ!ChanServ@services.example.com 123123123
-    Server: :example.server 701 tester #chat ban :*!*@192.0.2.70 ChanServ!ChanServ@services.example.com 123123123
-    Server: :example.server 702 tester #chat ban :End of list
+    Server: :example.server BBB tester #chat ban :*!*example.org mike!mike@localhost 567890123
+    Server: :example.server BBB tester #chat ban :*!*@192.0.2.69 ChanServ!ChanServ@services.example.com 123123123
+    Server: :example.server BBB tester #chat ban :*!*@192.0.2.70 ChanServ!ChanServ@services.example.com 123123123
+    Server: :example.server AAA tester #chat ban :End of list
 
 
 ## Changing modes
@@ -251,3 +260,16 @@ Letter | Name
  `w`   | `wallops`
  `s`   | `snomask`
 ---------------------
+
+### Numerics
+
+New numerics that this spec defines are:
+
+| No. | Label                   |
+| --- | ----------------------- |
+| 960 | `RPL_ENDOFPROPLIST`     |
+| 961 | `RPL_PROPLIST`          |
+| AAA | `RPL_ENDOFLISTPROPLIST` |
+| BBB | `RPL_LISTPROPLIST`      |
+| XXX | `RPL_CHMODELIST`        |
+| XXX | `RPL_UMODELIST`         |
