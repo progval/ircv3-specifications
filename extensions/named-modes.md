@@ -241,29 +241,27 @@ The following sections define names for existing standard modes.
 
 ### RFC 1459 channel modes
 
-Letter | Name
------- | ------------
- `o`   | `op`
- `v`   | `voice`
- `b`   | `ban`
- `i`   | `inviteonly`
- `l`   | `limit`
- `m`   | `moderated`
- `n`   | `noextmsg`
- `k`   | `key`
- `p`   | `private`
- `s`   | `secret`
----------------------
+| Letter | Name         | Type       | Notes |
+| ------ | ------------ | ---------- | ----- |
+|  `o`   | `op`         | 5 (prefix) |       |
+|  `v`   | `voice`      | 5 (prefix) |       |
+|  `b`   | `ban`        | 1 (list)   |       |
+|  `i`   | `inviteonly` | 4 (flag)   |       |
+|  `l`   | `limit`      | 3 (param)  |       |
+|  `m`   | `moderated`  | 4 (flag)   |       |
+|  `n`   | `noextmsg`   | 4 (flag)   |       |
+|  `k`   | `key`        | 3 (param)  | `+k` is oftn in `CHANMODES` group 2 |
+|  `p`   | `private`    | 4 (flag)   |       |
+|  `s`   | `secret`     | 4 (flag)   |       |
 
 ### RFC 1459 user modes
 
-Letter | Name
------- | ------------
- `i`   | `invisible`
- `o`   | `oper`
- `w`   | `wallops`
- `s`   | `snomask`
----------------------
+| Letter | Name         | Type       |
+| ------ | ------------ | ---------- |
+|  `i`   | `invisible`  | 4 (flag)   |
+|  `o`   | `oper`       | 4 (flag)   |
+|  `w`   | `wallops`    | 4 (flag)   |
+|  `s`   | `snomask`    | 3 (param)  |
 
 ### Numerics
 
