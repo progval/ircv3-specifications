@@ -250,7 +250,7 @@ The following sections define names for existing standard modes.
 |  `l`   | `limit`      | 3 (param)  |       |
 |  `m`   | `moderated`  | 4 (flag)   |       |
 |  `n`   | `noextmsg`   | 4 (flag)   |       |
-|  `k`   | `key`        | 3 (param)  | `+k` is oftn in `CHANMODES` group 2 |
+|  `k`   | `key`        | 2 or 3 (param) |   |
 |  `p`   | `private`    | 4 (flag)   |       |
 |  `s`   | `secret`     | 4 (flag)   |       |
 
