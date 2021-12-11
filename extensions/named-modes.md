@@ -305,13 +305,15 @@ From RFC 2812:
 
 In widespread use across implementations:
 
-| Typical letter(s) | Name         | Type       | Definition |
-| ----------------- | ------------ | ---------- | ---------- |
-| `C`               | `noctcp`     | 4 (flag)   | Blocks CTCP messages other than ACTION |
-| `h`               | `halfop`     | 5 (prefix) | A power level between voice and op, with implementation-defined privileges |
-| `P`               | `permanent`  | 4 (flag)   | Channel does not disappear when empty. |
-| `R` or `r`        | `regonly`    | 4 (flag)   | Prevents users from joining unless they are authenticated with a network account. |
-| `z` or `S`        | `secureonly` | 4 (flag)   | Prevents users connected through insecure connections from joining. Also known as "sslonly" or "TLS-only". |
+| Typical letter(s) | Name          | Type       | Definition |
+| ----------------- | ------------- | ---------- | ---------- |
+| `a`               | `admin`       | 5 (prefix) | An implementation-defined power level, that usually cannot be kicked by ops and may or may not have power over them. Also known as "protected". |
+| `h`               | `halfop`      | 5 (prefix) | A power level between voice and op, with implementation-defined privileges |
+| `C`               | `noctcp`      | 4 (flag)   | Blocks CTCP messages other than ACTION |
+| `q`               | `owner`       | 5 (prefix) | A power level above admin and op. Also known as "founder" |
+| `P`               | `permanent`   | 4 (flag)   | Channel does not disappear when empty. |
+| `R` or `r`        | `regonly`     | 4 (flag)   | Prevents users from joining unless they are authenticated with a network account. |
+| `z` or `S`        | `secureonly`  | 4 (flag)   | Prevents users connected through insecure connections from joining. Also known as "sslonly" or "TLS-only". |
 
 New modes:
 
