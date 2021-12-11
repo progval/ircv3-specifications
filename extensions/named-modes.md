@@ -36,7 +36,7 @@ These numerics MAY occur more than once. If the reply consists of multiple lines
 
 ### RPL_CHMODELIST
 
-    :<server name> XXX <nick> [*] :{<type>:<modename>[=<letter>]}+
+    :<server name> XXX <nick> [*] {<type>:<modename>[=<letter>]}+
 
 where `<type>` is one of the following that tells the client about the nature
 of the mode:
@@ -53,7 +53,7 @@ Clients MUST ignore unknown types, even with multiple digits.
 
 ### RPL_UMODELIST
 
-    :<server name> YYY <nick> [*] :{<type>:<modename>[=<letter>]}+
+    :<server name> YYY <nick> [*] {<type>:<modename>[=<letter>]}+
 
 where type is
 * 3 - mode requires a parameter when setting, requires no parameter when unsetting.
@@ -89,22 +89,19 @@ Example 1: client connects and requests the named-modes capability
     Server: :server.example 003 tester :This server was created ...
     Server: :server.example 004 tester :server.example
     Server: :server.example 005 tester :EXCEPTS=e NICKLEN=30 INVEX=I MAP MODES=4 NETWORK=Example
-    Server: :server.example XXX tester :5:op=o 5:voice=v 4:private=p 4:secret=s 4:inviteonly=i 4:topiclock=t 4:noextmsg=n 4:moderated=m 3:limit=l 1:ban=b 2:key=k
-    Server: :server.example YYY tester :4:oper=o 4:invisible=i 1:snomask=s 4:wallops=w
+    Server: :server.example XXX tester 5:op=o 5:voice=v 4:private=p 4:secret=s 4:inviteonly=i 4:topiclock=t 4:noextmsg=n 4:moderated=m 3:limit=l 1:ban=b 2:key=k
+    Server: :server.example YYY tester 4:oper=o 4:invisible=i 1:snomask=s 4:wallops=w
 
 Example 2: the last line is equivalent to
-
-    Server: :server.example YYY tester * :4:oper=o
-    Server: :server.example YYY tester * :4:invisible=i
-    Server: :server.example YYY tester * :1:snomask=s
-    Server: :server.example YYY tester :4:wallops=w
-
-Example 3: like any IRC message, the colon is optional when the trailing parameter contains no space and does not start with an other colon, so this is equivalent to:
 
     Server: :server.example YYY tester * 4:oper=o
     Server: :server.example YYY tester * 4:invisible=i
     Server: :server.example YYY tester * 1:snomask=s
     Server: :server.example YYY tester 4:wallops=w
+
+Example 3: like any IRC message, the colon is optional when the trailing parameter contains no space and does not start with an other colon, so it is also equivalent to:
+
+    Server: :server.example YYY tester 4:oper=o 4:invisible=i 1:snomask=s :4:wallops=w
 
 ## Listing modes on a channel
 
@@ -189,7 +186,7 @@ command.
 
 Query syntax:
 
-    PROP <target> :{<+|-><modename>[=<parameter>]}+
+    PROP <target> {<+|-><modename>[=<parameter>]}+
 
 Add (+) or remove (-) the mode called `<modename>`, using `<parameter>` as
 the parameter, if required for the mode.
@@ -248,22 +245,22 @@ Clients MUST accept `MODE` messages.
 
 Changing channel modes
 
-    Client: PROP #egypt :+key=pyramids -topiclock +ban=*!*@example.com +ban=example!*@*
+    Client: PROP #egypt +key=pyramids -topiclock +ban=*!*@example.com +ban=example!*@*
 
 If the mode change is successful the following (or an equivalent) is sent to
 all clients supporting this capability:
 
-    Server: :nick!user@host PROP #egypt :key=pyramids -topiclock +ban=*!*@example.com +ban=example!*@*
+    Server: :nick!user@host PROP #egypt key=pyramids -topiclock +ban=*!*@example.com +ban=example!*@*
 
 Clients not supporting this capability receive the following (or an
 equivalent) mode change:
 
     Server: :nick!user@host MODE #egypt +kbb-t pyramids *!*@example.com example!*@*
 
-Or, for a single mode:
+The first two messages are, as usual, equivalent to:
 
-    Client: PROP #egypt +key=pyramids
-    Server: :nick!user@host PROP #egypt +key=pyramids
+    Client: PROP #egypt +key=pyramids -topiclock +ban=*!*@example.com :+ban=example!*@*
+    Server: :nick!user@host PROP #egypt :key=pyramids -topiclock +ban=*!*@example.com :+ban=example!*@*
 
 
 ## Mode names
