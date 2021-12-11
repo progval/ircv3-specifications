@@ -138,7 +138,7 @@ Query syntax:
 
 Reply syntax:
 
-    RPL_LISTPROPLIST <nick> <channel> <modename> :<mask> [<setter> <settime>]
+    RPL_LISTPROPLIST <nick> <channel> <modename> <mask> [<setter> <settime>]
     RPL_ENDOFLISTPROPLIST <nick> <channel> <modename> :End of list
 
 Servers MAY send multiple `RPL_PROPLIST` replies before `RPL_ENDOFPROPLIST`.
@@ -158,9 +158,9 @@ Example without the optional arguments:
 Example with the optional arguments:
 
     Client: PROP #opers ban
-    Server: :server.example BBB tester #chat ban :*!*example.org mike!mike@localhost 567890123
-    Server: :server.example BBB tester #chat ban :*!*@192.0.2.69 ChanServ!ChanServ@services.example.com 123123123
-    Server: :server.example BBB tester #chat ban :*!*@192.0.2.70 ChanServ!ChanServ@services.example.com 123123123
+    Server: :server.example BBB tester #chat ban *!*example.org mike!mike@localhost :567890123
+    Server: :server.example BBB tester #chat ban *!*@192.0.2.69 ChanServ!ChanServ@services.example.com :123123123
+    Server: :server.example BBB tester #chat ban *!*@192.0.2.70 ChanServ!ChanServ@services.example.com :123123123
     Server: :server.example AAA tester #chat ban :End of list
 
 
