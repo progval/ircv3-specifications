@@ -244,7 +244,7 @@ equivalent) mode change:
 
 `<modename>` in the grammars above is defined as follows:
 
-    <modename>        ::= [ <prefix> ] [ <vendor> '/' ] <key_name>
+    <modename>        ::= [ <vendor> '/' ] <key_name>
     <unqual_modename> ::= <non-empty sequence of ascii letters, digits, hyphens ('-')>
     <vendor>          ::= <host>
 
