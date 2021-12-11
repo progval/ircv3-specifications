@@ -150,7 +150,7 @@ or server name of the entity who placed this mode.
 
 Example without the optional arguments:
 
-    Client: PROP #chat ban
+    Client: PROP #chat :ban
     Server: :server.example BBB tester #chat ban :*!*@example.org
     Server: :server.example BBB tester #chat ban :another!banned@user.example.com
     Server: :server.example AAA tester #chat ban :End of list
@@ -161,6 +161,13 @@ Example with the optional arguments:
     Server: :server.example BBB tester #chat ban *!*example.org mike!mike@localhost :567890123
     Server: :server.example BBB tester #chat ban *!*@192.0.2.69 ChanServ!ChanServ@services.example.com :123123123
     Server: :server.example BBB tester #chat ban *!*@192.0.2.70 ChanServ!ChanServ@services.example.com :123123123
+    Server: :server.example AAA tester #chat ban :End of list
+
+Note that the first example is equivalent to:
+
+    Client: PROP #chat ban
+    Server: :server.example BBB tester #chat ban *!*@example.org
+    Server: :server.example BBB tester #chat ban another!banned@user.example.com
     Server: :server.example AAA tester #chat ban :End of list
 
 
@@ -182,7 +189,7 @@ command.
 
 Query syntax:
 
-    PROP <target> {<+|-><modename>[=<parameter>]}+
+    PROP <target> :{<+|-><modename>[=<parameter>]}+
 
 Add (+) or remove (-) the mode called `<modename>`, using `<parameter>` as
 the parameter, if required for the mode.
@@ -252,6 +259,11 @@ Clients not supporting this capability receive the following (or an
 equivalent) mode change:
 
     Server: :nick!user@host MODE #egypt +kbb-t pyramids *!*@example.com example!*@*
+
+Or, for a single mode:
+
+    Client: PROP #egypt +key=pyramids
+    Server: :nick!user@host PROP #egypt key=pyramids
 
 
 ## Mode names
