@@ -36,7 +36,7 @@ These numerics MAY occur more than once. If the reply consists of multiple lines
 
 ### RPL_CHMODELIST
 
-    :<server name> XXX <nick> [*] {<type>:<modename>[=<letter>]}+
+    :<server name> XXX <nick> [*] :{<type>:<modename>[=<letter>]}+
 
 where `<type>` is one of the following that tells the client about the nature
 of the mode:
@@ -53,7 +53,7 @@ Clients MUST ignore unknown types, even with multiple digits.
 
 ### RPL_UMODELIST
 
-    :<server name> YYY <nick> [*] {<type>:<modename>[=<letter>]}+
+    :<server name> YYY <nick> [*] :{<type>:<modename>[=<letter>]}+
 
 where type is
 * 3 - mode requires a parameter when setting, requires no parameter when unsetting.
@@ -73,6 +73,8 @@ handle this.
 Servers MAY send no RPL_MYINFO numeric at all, clients
 MUST handle this case as well.
 
+### Examples
+
 Example 1: client connects and requests the named-modes capability
 
     Client: CAP LS
@@ -89,6 +91,20 @@ Example 1: client connects and requests the named-modes capability
     Server: :server.example 005 tester :EXCEPTS=e NICKLEN=30 INVEX=I MAP MODES=4 NETWORK=Example
     Server: :server.example XXX tester :5:op=o 5:voice=v 4:private=p 4:secret=s 4:inviteonly=i 4:topiclock=t 4:noextmsg=n 4:moderated=m 3:limit=l 1:ban=b 2:key=k
     Server: :server.example YYY tester :4:oper=o 4:invisible=i 1:snomask=s 4:wallops=w
+
+Example 2: the last line is equivalent to
+
+    Server: :server.example YYY tester * :4:oper=o
+    Server: :server.example YYY tester * :4:invisible=i
+    Server: :server.example YYY tester * :1:snomask=s
+    Server: :server.example YYY tester :4:wallops=w
+
+Example 3: like any IRC message, the colon is optional when the trailing parameter contains no space and does not start with an other colon, so this is equivalent to:
+
+    Server: :server.example YYY tester * 4:oper=o
+    Server: :server.example YYY tester * 4:invisible=i
+    Server: :server.example YYY tester * 1:snomask=s
+    Server: :server.example YYY tester 4:wallops=w
 
 ## Listing modes on a channel
 
