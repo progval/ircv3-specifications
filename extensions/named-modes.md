@@ -17,6 +17,12 @@ copyrights:
 
 ---
 
+## Notes for implementing work-in-progress version
+
+This is a work-in-progress specification.
+
+Software implementing this work-in-progress specification MUST NOT use the unprefixed `named-modes` capability name. Instead, implementations SHOULD use the `draft/named-modes` capability name to be interoperable with other software implementing a compatible work-in-progress version. The final version of the specification will use an unprefixed name.
+
 ## Introduction
 
 This specification describes a mechanism to define and manipulate additional modes (channel and user configuration settings) beyond those specified in the original IRC RFCs.
