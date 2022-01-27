@@ -31,11 +31,11 @@ This specification introduces the `draft/FILEHOST` isupport token.
 
 Its value MUST be a (possibly empty) space-separated list of URIs, and they SHOULD use either the `http` or `https`. 
 
-Clients SHOULD ignore any value that isn't a URI, or a URL that does not use either of these schemes.
+Clients SHOULD ignore any value that isn't a URI, or a URI that does not use either of these schemes.
 
 When clients which to post an image using the network's recommended service, they should send an HTTP POST to any of these URIs.
 
-If the response has the `201 Created` HTTP status code, they MAY read the `Location` header and use it as the URL of the uploaded image, which they can use as any URL.
+If the response has the `201 Created` HTTP status code, they MAY read the `Location` header and use it as the URI of the uploaded image, which they can use as any URI.
 
 Clients SHOULD gracefully handle other common HTTP status codes that could occur, including, but not limited to:
 
