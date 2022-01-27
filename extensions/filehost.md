@@ -37,4 +37,9 @@ When clients which to post an image using the network's recommended service, the
 
 If the response has the `201 Created` HTTP status code, they MAY read the `Location` header and use it as the URL of the uploaded image, which they can use as any URL.
 
-Clients SHOULD gracefully handle other common HTTP status codes that could occur.
+Clients SHOULD gracefully handle other common HTTP status codes that could occur, including, but not limited to:
+
+* `401 Unauthorized`
+* `403 Forbidden`
+* `404 Not Found`
+* `5xx` server errors
