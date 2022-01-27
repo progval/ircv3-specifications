@@ -43,3 +43,11 @@ Clients SHOULD gracefully handle other common HTTP status codes that could occur
 * `403 Forbidden`
 * `404 Not Found`
 * `5xx` server errors
+
+## Implementation Considerations
+
+*This section is not normative*
+
+Server implementations should take care to avoid abuse.
+
+They may, for example, provide custom `draft/FILEHOST` URIs (with secret credentials) to clients after they authenticated with SASL.
