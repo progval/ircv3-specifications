@@ -29,13 +29,11 @@ This specification offers a way for network administrators to recommend a hostin
 
 This specification introduces the `draft/FILEHOST` isupport token.
 
-Its value MUST be a space-separated list of URIs, and it SHOULD use either the `http` or `https`.
+Its value MUST be a (possibly empty) space-separated list of URIs, and they SHOULD use either the `http` or `https`. 
 
-Clients SHOULD ignore any value that isn't a URI (including the empty value),
-or a URL that does not use either of these schemes.
+Clients SHOULD ignore any value that isn't a URI, or a URL that does not use either of these schemes.
 
-When clients which to post an image using the network's recommended service,
-they should send an HTTP POST to this URL.
+When clients which to post an image using the network's recommended service, they should send an HTTP POST to any of these URIs.
 
 If the response has the `201 Created` HTTP status code, they MAY read the `Location` header and use it as the URL of the uploaded image, which they can use as any URL.
 
