@@ -1,5 +1,5 @@
 ---
-title: The Imagehost ISUPPORT token
+title: The Filehost ISUPPORT token
 layout: spec
 work-in-progress: true
 copyrights:
@@ -14,8 +14,8 @@ copyrights:
 This is a work-in-progress specification.
 
 Software implementing this work-in-progress specification MUST NOT use
-the unprefixed `IMAGEHOST` isupport token
-Instead, implementations SHOULD use the `draft/IMAGEHOST`
+the unprefixed `FILEHOST` isupport token
+Instead, implementations SHOULD use the `draft/FILEHOST`
 isupport token to be interoperable with other software implementing
 a compatible work-in-progress version.
 
@@ -23,12 +23,11 @@ The final version of the specification will use an unprefixed capability name.
 
 # Motivation
 
-This specification offers a way for network administrators to recommend
-a hosting service for users to post images.
+This specification offers a way for network administrators to recommend a hosting service for users to upload files (such as images), so they can post them on IRC.
 
 ## Architecture
 
-This specification introduces the `draft/IMAGEHOST` isupport token.
+This specification introduces the `draft/FILEHOST` isupport token.
 
 Its value MUST be a space-separated list of URIs, and it SHOULD use either the `http` or `https`.
 
