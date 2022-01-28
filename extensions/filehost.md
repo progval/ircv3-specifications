@@ -33,7 +33,7 @@ Its value MUST be a (possibly empty) space-separated list of URIs, and they SHOU
 
 Clients SHOULD ignore any value that isn't a URI, or a URI that does not use either of these schemes.
 
-When clients which to post an image using the network's recommended service, they should send an HTTP POST to any of these URIs.
+When clients wish to post an image using the network's recommended service, they should send an HTTP POST to any of these URIs.
 
 If the response has the `201 Created` HTTP status code, they MAY read the `Location` header and use it as the URI of the uploaded image, which they can use as any URI.
 
