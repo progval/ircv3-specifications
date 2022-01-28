@@ -29,7 +29,7 @@ This specification offers a way for network administrators to recommend a hostin
 
 This specification introduces the `draft/FILEHOST` isupport token.
 
-Its value MUST be a (possibly empty) space-separated list of URIs, and they SHOULD use either the `http` or `https`. 
+Its value MUST be a (possibly empty) space-separated list of URIs, and they SHOULD use either the `http` or `https` schemes. 
 
 Clients SHOULD ignore any value that isn't a URI, or a URI that does not use either of these schemes.
 
