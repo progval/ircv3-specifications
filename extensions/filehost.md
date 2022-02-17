@@ -27,9 +27,9 @@ This specification offers a way for network administrators to recommend a hostin
 
 ## Architecture
 
-This specification introduces the `draft/FILEHOST` isupport token.
+This specification introduces the `draft/FILEHOST` RPL_ISUPPORT token. Please see https://modern.ircdocs.horse/#feature-advertisement for what an RPL_ISUPPORT token is.
 
-Its value MUST be a (possibly empty) space-separated list of URIs, and they SHOULD use either the `http` or `https` schemes. 
+Its value MUST be a (possibly empty) comma-separated list of URIs, and they SHOULD use either the `http` or `https` schemes. 
 
 Clients SHOULD ignore any value that isn't a URI, or a URI that does not use either of these schemes.
 
