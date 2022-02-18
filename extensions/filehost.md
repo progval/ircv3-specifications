@@ -29,9 +29,9 @@ This specification offers a way for network administrators to recommend a hostin
 
 This specification introduces the `draft/FILEHOST` RPL_ISUPPORT token. Please see https://modern.ircdocs.horse/#feature-advertisement for what an RPL_ISUPPORT token is.
 
-Its value MUST be a (possibly empty) comma-separated list of URIs, and they SHOULD use either the `http` or `https` schemes. 
+Its value MUST be a (possibly empty) comma-separated list of URIs, and they MUST use the `https` scheme. This is due to there being privacy concerns while in private communication channels or channels which require TLS. Allowing `http` would enable an attacker to see what people are sharing in a private context.
 
-Clients SHOULD ignore any value that isn't a URI, or a URI that does not use either of these schemes.
+Clients SHOULD ignore any value that isn't a URI, or a URI that does not use this scheme.
 
 When clients wish to post an image using the network's recommended service, they should send an HTTP POST to any of these URIs.
 
