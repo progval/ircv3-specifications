@@ -80,4 +80,5 @@ to show how servers rewrites the client's messages
     S: @+example.org/tag1=value1,+example.org/tag2=value2 :nick!user@host PRIVMSG #channel :all tags are allowed again
 
 [message-tags]: ../extensions/message-tags.html
+[message-tags#rpl_isupport-tokens]: ../extensions/message-tags.html#rpl_isupport-tokens
 [named-modes]: ../extensions/named-modes.html
