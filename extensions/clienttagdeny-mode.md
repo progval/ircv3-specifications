@@ -64,13 +64,13 @@ to show how servers rewrites the client's messages
     C: @+example.org/tag1=value1,+example.org/tag2=value2 PRIVMSG #channel :by default, all client tags are allowed
     S: @+example.org/tag1=value1,+example.org/tag2=value2 :nick!user@host PRIVMSG #channel :by default, all client tags are allowed
 
-    C: PROP #example draft/clienttagdeny=example.org/tag1
-    S: :nick!user@host PROP #example :draft/clienttagdeny=example.org/tag1
+    C: PROP #example +draft/clienttagdeny=example.org/tag1
+    S: :nick!user@host PROP #example :+draft/clienttagdeny=example.org/tag1
     C: @+example.org/tag1=value1,+example.org/tag2=value2 PRIVMSG #channel :now, all tags but example.org/tag1=value1 are allowed
     S: @+example.org/tag2=value2 :nick!user@host PRIVMSG #channel :now, all tags but example.org/tag1=value1 are allowed
 
-    C: PROP #example draft/clienttagdeny=*,-example.org/tag1
-    S: :nick!user@host PROP #example :draft/clienttagdeny=*,example.org/tag1
+    C: PROP #example +draft/clienttagdeny=*,-example.org/tag1
+    S: :nick!user@host PROP #example :+draft/clienttagdeny=*,example.org/tag1
     C: @+example.org/tag1=value1,+example.org/tag2=value2 PRIVMSG #channel :now, only example.org/tag1=value1 is allowed
     S: @+example.org/tag1=value1 :nick!user@host PRIVMSG #channel :now, only example.org/tag1=value1 is allowed
 
