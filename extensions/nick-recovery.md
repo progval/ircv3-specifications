@@ -42,10 +42,6 @@ This specification adds the `draft/nick-recovery` capability, whose presence sig
 
 Clients MUST ignore this capability's value.
 
-### Tags
-
-New tags that this spec defines are listed here. If there are none, this section can be omitted.
-
 ### Commands
 
     GHOST <nick>
