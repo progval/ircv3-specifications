@@ -50,13 +50,13 @@ New tags that this spec defines are listed here. If there are none, this section
 
     GHOST <nick>
 
-The `GHOST` command requests that the server closes any connection currently using the given nick.
+The `GHOST` command requests that the server changes the nick of (or closes) any connection currently using the given nick.
 
 Servers SHOULD respond with either `GHOST SUCCESS` or a standard reply.
 
     RECOVER <nick>
 
-The `GHOST` command requests that the server closes any connection currently using the given nick.
+The `GHOST` command requests that the server changes the nick of (or closes) any connection currently using the given nick.
 
 This is similar to sending both `GHOST` and `NICK` commands, but acts atomically: if the command succeeds, then the client's nick MUST change.
 
