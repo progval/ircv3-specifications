@@ -36,65 +36,57 @@ This specification introduces first-class IRC commands, which clients can progra
 
 This specification uses [standard replies][] framework.
 
-### Capabilities
+### Capability
 
-This specification adds the `draft/nick-recovery` capability, whose presence signifies that the server accepts the `GHOST` and `RECOVER` commands.
+This specification adds the `draft/nick-recovery` capability, whose presence signifies that the server accepts the `RECOVER` command.
 
 Clients MUST ignore this capability's value.
 
-### Commands
 
-    GHOST <nick>
 
-The `GHOST` command requests that the server changes the nick of (or closes) any connection currently using the given nick.
 
-Servers SHOULD respond with either `GHOST SUCCESS` or a standard reply.
+### Command
 
-    RECOVER <nick>
+    RECOVER <nick> [NOCHANGE]
 
-The `GHOST` command requests that the server changes the nick of (or closes) any connection currently using the given nick.
+The `RECOVER` command requests that the server changes the nick of (or closes) any connection currently using the given nick.
 
-This is similar to sending both `GHOST` and `NICK` commands, but acts atomically: if the command succeeds, then the client's nick MUST change.
+If the command succeeds, then the client's nick MUST change, unless the client provided the `NOCHANGE` flag.
 
 Servers SHOULD respond with either `RECOVER SUCCESS` and `NICK`, or a standard reply.
 The parameter of the `NICK` sent as a reply SHOULD be the one requested by the client.
 
 ### Responses
 
-    GHOST SUCCESS <nick> <message>
     RECOVER SUCCESS <nick> <message>
 
-Indicates a `GHOST` or `RECOVER` command sent by the client succeeded.
+Indicates a `RECOVER` command sent by the client succeeded.
 `<nick>` MUST be the same nick as the one requested by the client, but MAY be casefolded.
 
 `RECOVER SUCCESS` MUST be followed by a `NICK` command.
 
-    FAIL GHOST NOT_AUTHENTICATED <nick> <message>
     FAIL RECOVER NOT_AUTHENTICATED <nick> <message>
 
 Sent by the server if the client is not authenticated.
 
-    FAIL GHOST NOT_AUTHORISED <nick> <message>
     FAIL RECOVER NOT_AUTHORISED <nick> <message>
 
 Sent by the server if the client is authenticated to an account that does not own the requested nick.
 
-    FAIL GHOST NOT_REGISTERED <nick> <message>
     FAIL RECOVER NOT_REGISTERED <nick> <message>
 
 Sent by the server if the requested nick is not registered (ie. no account may disconnect it).
 
-    FAIL GHOST TEMPORARILY_UNAVAILABLE <nick> <message>
     FAIL RECOVER TEMPORARILY_UNAVAILABLE <nick> <message>
 
-Sent by the server if the `GHOST`/`RECOVER` commands are temporarily unavailable and/or temporarily cannot be used on the given nick.
+Sent by the server if the `RECOVER` commands are temporarily unavailable and/or temporarily cannot be used on the given nick.
 
 
 ## Implementation Considerations
 
 Servers which allow multiple connections to the same nick (including bouncers) typically do not need to implement this specification, except to forward commands to upstream servers.
 
-When sent during connection registration, servers MAY delay the effect of `GHOST`/`RECOVER` (closing the other connection) until `CAP END` is sent, but not the response to the command, so this is transparent to the client.
+When sent during connection registration, servers MAY delay the effect of `RECOVER` (closing the other connection) until `CAP END` is sent, but not the response to the command, so this is transparent to the client.
 
 
 [standard replies]: ../extensions/standard-replies.html
