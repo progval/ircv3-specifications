@@ -77,6 +77,10 @@ Sent by the server if the client is authenticated to an account that does not ow
 
 Sent by the server if the requested nick is not registered (ie. no account may disconnect it).
 
+    FAIL RECOVER UNAUTHENTICATED_TARGET <nick> <message>
+
+Sent by the server if the requested nick is not authenticated not the account that owns the nick -- if the server has such a requirement.
+
     FAIL RECOVER TEMPORARILY_UNAVAILABLE <nick> <message>
 
 Sent by the server if the `RECOVER` commands are temporarily unavailable and/or temporarily cannot be used on the given nick.
