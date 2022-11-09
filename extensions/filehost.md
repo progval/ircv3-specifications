@@ -51,3 +51,9 @@ Clients SHOULD gracefully handle other common HTTP status codes that could occur
 Server implementations should take care to avoid abuse.
 
 They may, for example, provide custom `draft/FILEHOST` URIs (with secret credentials) to clients after they authenticated with SASL.
+
+## Client example view
+The following example uses two example enpoints called `https://random.uri/` and `https://another.random.uri/`
+```
+:irc.server 005 YourNick draft/FILEHOST=https://random.uri/\x20https://another.random.uri/
+```
