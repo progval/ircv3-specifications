@@ -11,6 +11,10 @@ copyrights:
     name: "Simon Ser"
     period: "2022"
     email: "contact@emersion.fr"
+  -
+    name: "Val Lorentz"
+    period: "2022"
+    email: "progval+ircv3@progval.net"
 ---
 
 ## Notes for implementing work-in-progress version
@@ -39,23 +43,27 @@ Clients can know whether a user has already read newly received messages. For cl
 
 Clients never have to actively get the read timestamp because it is provided to them on join and as updated by the server, except for user targets where they have to request the initial read timestamp by sending a `MARKREAD` client get command.
 
+### ISUPPORT token
+
+This specification reuses the `MSGREFTYPES` ISUPPORT token defined by the [chathistory][chathistory] specification.
+
 ### `MARKREAD` Command
 
 The `MARKREAD` command can be sent by both clients and servers.
 
 This command has the following general syntax:
 
-    MARKREAD <target> [<timestamp>]
+    MARKREAD <target> [<* | timestamp | msgid>]
 
 The `target` parameter specifies a single buffer (channel or nickname).
 
-The `timestamp` parameter, if specified, MUST be a literal `*`, or have the format `timestamp=YYYY-MM-DDThh:mm:ss.sssZ`, as in the [server-time](https://ircv3.net/specs/extensions/server-time) extension.
+A `timestamp` parameter MUST have the format `timestamp=YYYY-MM-DDThh:mm:ss.sssZ`, as in the [server-time][server-time] extension. A `msgid` parameter MUST have the format `msgid=foobar`, as in the [message-ids][message-ids] extension.
 
 #### `MARKREAD` client set command
 
-    MARKREAD <target> <timestamp>
+    MARKREAD <target> <timestamp | msgid>
 
-When sent from a client, this command signals to the server that the last message read by the user, to the best knowledge of the client, has the specified timestamp. The timestamp MUST correspond to a previous message `time` tag. The timestamp MUST NOT be a literal `*`.
+When sent from a client, this command signals to the server that the last message read by the user, to the best knowledge of the client, has the specified timestamp. The timestamp MUST correspond to a previous message `time` tag.
 
 The server MUST reply to a successful `MARKREAD` client set command using a `MARKREAD` server command, or using an error message. If the provided timestamp is older than the server's stored value, the server MUST reply to the client with a `MARKREAD` command carrying the server's stored value.
 
@@ -71,9 +79,13 @@ The server MUST reply to a successful `MARKREAD` get command using a `MARKREAD` 
 
 When sent from a server, the `MARKREAD` command signals to the client that the last message read by the user, to the best knowledge of the server, has the specified timestamp. In that case, the command has the following syntax:
 
-    MARKREAD <target> <timestamp>
+    MARKREAD <target> {* | {<timestamp | msgid>}+}
 
-If there is no known last message read timestamp, the `timestamp` parameter is a literal `*`. Otherwise, it is the formatted timestamp of the last read message.
+If there is no known last message read timestamp, the last parameter parameter is a literal `*`.
+
+Otherwise, it is the formatted timestamp and/or message id of the last read message.
+`timestamp` and `msgid` parameters MUST NOT be sent more than once each.
+Clients SHOULD ignore their order.
 
 #### Command flows
 
@@ -105,17 +117,36 @@ If the read timestamp cannot be set or returned due to an error, the `INTERNAL_E
 
 ### Examples
 
-Updating the read timestamp after the user receives and reads a message
+### Updating
+
+Updating the read timestamp after the user receives and reads a message:
 ~~~~
 [s] @time=2019-01-04T14:33:26.123Z :nick!ident@host PRIVMSG #channel :message
 [c] MARKREAD #channel timestamp=2019-01-04T14:33:26.123Z
 [s] :irc.host MARKREAD #channel timestamp=2019-01-04T14:33:26.123Z
 ~~~~
 
+Or if the server also supports msgid:
+~~~~
+[s] @time=2019-01-04T14:33:26.123Z;msgid=1234 :nick!ident@host PRIVMSG #channel :message
+[c] MARKREAD #channel timestamp=2019-01-04T14:33:26.123Z
+[s] :irc.host MARKREAD #channel timestamp=2019-01-04T14:33:26.123Z msgid=1234
+~~~~
+
+Alternatively, the client may reference the message by msgid:
+
+~~~~
+[s] @time=2019-01-04T14:33:26.123Z;msgid=1234 :nick!ident@host PRIVMSG #channel :message
+[c] MARKREAD #channel msgid=1234
+[s] :irc.host MARKREAD #channel timestamp=2019-01-04T14:33:26.123Z msgid=1234
+~~~~
+
+### Getting current status
+
 Getting the read timestamp automatically after joining a channel when the capability is negotiated
 ~~~~
 [s] :nick!ident@host JOIN #channel
-[s] :irc.host MARKREAD #channel timestamp=2019-01-04T14:33:26.123Z
+[s] :irc.host MARKREAD #channel timestamp=2019-01-04T14:33:26.123Z msgid=1234
 ~~~~
 
 Getting the read timestamp automatically for a channel without any set timestamp
@@ -127,12 +158,23 @@ Getting the read timestamp automatically for a channel without any set timestamp
 Asking the server about the read timestamp for a particular user
 ~~~~
 [c] MARKREAD target
+[s] :irc.host MARKREAD target timestamp=2019-01-04T14:33:26.123Z msgid=1234
+~~~~
+
+Or if the server only supports timestamps:
+~~~~
+[c] MARKREAD target
 [s] :irc.host MARKREAD target timestamp=2019-01-04T14:33:26.123Z
 ~~~~
 
 ## Implementation Considerations
 
+*This section is not normative.*
+
 Server implementations can typically store a per-target timestamp variable that stores the timestamp of the last read message. When it receives a new timestamp, it can clamp it between the last read timestamp and the current time, and broadcast the new value to all clients if it was changed.
+
+When servers send only `msgid` and no `timestamp`, clients can do the same by looking up the timestamp of referenced messages in their local history.
+Because this can be cumbersome or impossible for clients, servers should always send timestamps.
 
 Client implementations can know when a user has read messages by using various techniques such as when the focus shifts to their window or activity, when the messages are scrolled, when the user is idle, etc. They should not assume that any message appended to the buffer is being read by the client right now, especially when the window does not have the focus or is not visible. It is indeed a best-effort value.
 
@@ -141,3 +183,7 @@ Clients should typically only need to use the `MARKREAD` get client command to g
 ## Security Considerations
 
 Servers MUST NOT leak read markers sent by a user to other users, unless the user has explicitly opted in with an unspecified mechanism (e.g. separate extension or NickServ setting).
+
+[chathistory]: ../extensions/chathistory.html
+[server-time]: ../extensions/server-time.html
+[message-ids]: ../extensions/message-ids.html
