@@ -40,10 +40,18 @@ This specification uses [standard replies][] framework.
 
 This specification adds the `draft/nick-recovery` capability, whose presence signifies that the server accepts the `RECOVER` command.
 
-Clients MUST ignore this capability's value.
+The capability MAY be advertised by servers with an OPTIONAL value: a comma (`,`) (0x2C) separated list of tokens.
+Each token consists of a key with an optional value attached.
+If there is a value attached, the value is separated from the key by an equals sign (`=`) (0x3D).
+That is, `<key>[=<value>][,<key2>[=<value2>][,<keyN>[=<valueN>]]]`.
+Keys specified in this document MUST only occur at most once.
 
+Clients MUST ignore every token with a key that they don't understand, and MUST ignore any value in these tokens.
 
+The only defined capability keys so far are:
 
+ * `before-connect` - if present, indicates the server supports early registration, so it MUST NOT use `FAIL REGAIN COMPLETE_CONNECTION_REQUIRED`
+ * `unauthenticated-target` - if present, indicates the server supports recovering nicks of users who are not authenticated with the same account, so it MUST NOT use  `FAIL REGAIN UNAUTHENTICATED_TARGET`
 
 ### Command
 
